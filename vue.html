@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Matrix Transposition</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+</head>
+<body>
+    <div id="app">
+        <h2>Matrix Transposition</h2>
+
+        <div>
+            <label for="matrix">Enter the matrix:</label>
+            <textarea id="matrix" v-model="matrixInput" rows="5" cols="30"></textarea>
+        </div>
+
+        <button @click="transposeMatrix">Transpose</button>
+
+        <div v-if="transposedMatrix.length > 0">
+            <h3>Transposed Matrix:</h3>
+            <ul>
+                <li v-for="row in transposedMatrix">{{ row }}</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                matrixInput: '',
+                transposedMatrix: []
+            },
+            methods: {
+                transposeMatrix() {
+                    const matrixRows = this.matrixInput.trim().split('\n');
+                    const matrix = matrixRows.map(row => row.split(' ').map(Number));
+
+                    const transposed = matrix[0].map((col, i) => matrix.map(row => row[i]));
+
+                    this.transposedMatrix = transposed;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
